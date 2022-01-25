@@ -4,6 +4,8 @@
 // @version      0.1
 // @description  Reads Reddit posts out loud
 // @author       Heiko Häng
+// @updateURL    https://github.com/heikohang/reddit-speak/raw/main/reddit-speak.user.js
+// @downloadURL  https://github.com/heikohang/reddit-speak/raw/main/reddit-speak.user.js
 // @match        https://www.reddit.com/r/*/comments/*
 // @icon         https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png
 // @grant        GM_addStyle
@@ -34,27 +36,27 @@ async function fetchAudioAzureStream(text, token) {
 }
 
 async function fetchAzureToken() {
-	try{
-		const response = await fetch("https://cors-heiko.herokuapp.com/https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/", {
+    try{
+        const response = await fetch("https://cors-heiko.herokuapp.com/https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/", {
         method: "GET",
         headers: {
             "Origin": "null"
         }
         })
-		const res = await response.text();
+        const res = await response.text();
         const token = res.match("token: \"(.+?)\"");
-		return token[1];
-	} catch(err) {
-		console.error(err);
-	}
+        return token[1];
+    } catch(err) {
+        console.error(err);
+    }
 }
 
 async function fetchAudioAzure(text) {
-	let azuretoken = await fetchAzureToken("Tere-tere vana kere");
-	console.log(azuretoken);
-	let azureblob = await fetchAudioAzureStream(text, azuretoken);
-	console.log(azureblob);
-	return azureblob;
+    let azuretoken = await fetchAzureToken("Tere-tere vana kere");
+    console.log(azuretoken);
+    let azureblob = await fetchAudioAzureStream(text, azuretoken);
+    console.log(azureblob);
+    return azureblob;
 }
 
 function createTTSBox() {
@@ -111,7 +113,7 @@ function createAudioBox(url) {
 }
 
 function setAudioBoxStream(url) {
-  document.getElementById("audioplayersource").src = url;
+    document.getElementById("audioplayersource").src = url;
 }
 
 function TTS(text) {
@@ -132,8 +134,8 @@ function TTS(text) {
 }
 
 function getArticle() {
-  let article_text = document.getElementsByClassName("usertext-body")[1].innerText;
-  return article_text;
+    let article_text = document.getElementsByClassName("usertext-body")[1].innerText;
+    return article_text;
 }
 
 
